@@ -1,16 +1,22 @@
 // Step 1: Import React
 import * as React from 'react'
-import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import { StaticImage } from 'gatsby-plugin-image'
+import { graphql } from 'gatsby'
 
-
+export const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        description,
+      }
+    }
+  }`
 
 // Step 2: Define your component
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
   return (
     <main>
-      <title>Home Page</title>
       <Layout pageTitle="Home Page">
       <p>I'm making this by following the Gatsby Tutorial.</p>
       <StaticImage
@@ -22,6 +28,7 @@ const IndexPage = () => {
         src="../images/icon.png"
       />
       </Layout>
+      <p>{ data.site.siteMetadata.description }</p>
     </main>
   )
 }
